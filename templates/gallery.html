@@ -30,59 +30,11 @@
                                 </path>
                             </svg>
                         </button>
-                        <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
+                        <a href="#" class="flex ms-2 md:me-24">
                             <span
-                                class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Image Share</span>
+                                class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Image
+                                Share</span>
                         </a>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex items-center ms-3">
-                            <div>
-                                <button type="button"
-                                    class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                    aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                    <span class="sr-only">Open user menu</span>
-                                    <img class="w-8 h-8 rounded-full"
-                                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                        alt="user photo">
-                                </button>
-                            </div>
-                            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                                id="dropdown-user">
-                                <div class="px-4 py-3" role="none">
-                                    <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                        Neil Sims
-                                    </p>
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-                                        role="none">
-                                        neil.sims@flowbite.com
-                                    </p>
-                                </div>
-                                <ul class="py-1" role="none">
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            role="menuitem">Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            role="menuitem">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            role="menuitem">Earnings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            role="menuitem">Sign out</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -94,12 +46,16 @@
             aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
+                    <a type="button" href="{% url 'gallery' %}" class="mt-2 w-full text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-left">All</a>
+                    {% for category in categories %}
                     <li>
-                        <a href="{% url 'add' %}"
+                        <a href="{% url 'gallery' %}?category={{category.name}}"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <span class="ms-3">Add photo</span>
+                            <span class="ms-3">{{category.name}}</span>
                         </a>
                     </li>
+                    {% endfor %}
+                    <a type="button" href="{% url 'add' %}" class="mt-2 w-full text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-left">Add photo</a>
                 </ul>
             </div>
         </aside>
@@ -110,38 +66,47 @@
                 class="p-4 h-full overflow-auto border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
 
-                    <!-- Card 1 -->
+                    {% for photo in photos %}
                     <div
                         class="flex flex-col max-h-[600px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#" class="h-[200px] md:h-[250px] flex">
-                            <img class="rounded-t-lg object-cover  w-full h-auto"
-                                src="https://images.pexels.com/photos/19990334/pexels-photo-19990334/free-photo-of-close-up-of-yellow-flowers.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            <img class="rounded-t-lg object-contain w-full h-auto bg-gray-400" src="{{photo.image.url}}"
                                 alt="" />
                         </a>
                         <div class="p-5">
                             <a href="#">
-                                <p class="mb-2 text-sm md:text-base font-medium tracking-tight text-gray-900 dark:text-white">
-                                    Noteworthy technology acquisitions 2021</p>
+                                <p
+                                    class="mb-3 text-sm md:text-base font-medium tracking-tight text-gray-900 dark:text-white">
+                                    {{photo.description}}</p>
+                                <p
+                                    class="mb-3 text-xs md:text-sm font-light tracking-tight text-gray-900 dark:text-white">
+                                    Category: {{photo.category.name}}</p>
                             </a>
                             <div class="flex flex-row flex-wrap gap-2 md:gap-3">
-                                <a href="{% url 'photo' 5 %}"
+                                <a href="{% url 'photo' photo.id %}"
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     View Image
                                 </a>
                                 <a href="#"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border text-blue-700 rounded-lg focus:ring-4 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    onclick="copyText('{{ photo.image.url }}')"
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Copy Link
                                 </a>
                             </div>
                         </div>
                     </div>
-
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
                 </div>
 
             </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script>
+        function copyText(url){navigator.clipboard.writeText(url);}
+    </script>
 </body>
 
 </html>

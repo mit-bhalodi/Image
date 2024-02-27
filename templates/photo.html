@@ -12,11 +12,8 @@
     {% endcompress %}
 </head>
 
-<body>
-    <div class="w-full h-full">
-        <!-- Navigation -->
-    
-
+<body class="h-screen w-full bg-white dark:bg-gray-800">
+    <div class="w-full h-full ">
         <!-- Breadcrumb -->
         <nav class="flex mt-8 mx-6" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -34,8 +31,7 @@
                                 d="m1 9 4-4-4-4" />
                         </svg>
                         <a
-                            class="pointer-events-none ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">Photo
-                            Id</a>
+                            class="pointer-events-none ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{photo.id}}</a>
                     </div>
                 </li>
 
@@ -44,9 +40,9 @@
 
         <!-- Image -->
         <figure class="max-w-lg mt-8 mx-6">
-            <img class="h-auto max-w-full rounded-lg" src="https://images.pexels.com/photos/19528148/pexels-photo-19528148/free-photo-of-a-brick-wall-with-a-light-on-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" loading="lazy"
+            <img class="h-auto max-w-full rounded-lg border-2 border-white shadow-md" src="{{photo.image.url}}" loading="lazy"
                 alt="image description">
-            <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">Image caption</figcaption>
+            <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">{{photo.description}}</figcaption>
         </figure>
 
     </div>
