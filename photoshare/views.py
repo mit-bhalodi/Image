@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Category, Photo
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def gallery(request):
     category = request.GET.get('category')
     if category == None:
@@ -12,11 +14,13 @@ def gallery(request):
     context = { 'categories' : categories, 'photos': photos }
     return render(request, 'gallery.html', context)
 
+@login_required
 def viewPhoto(request, pk):
     photo = Photo.objects.get(id=pk)
     context = { 'photo': photo }
     return render(request, 'photo.html', context)
 
+@login_required
 def addPhoto(request):
     categories = Category.objects.all()
     context = { 'categories' : categories }
